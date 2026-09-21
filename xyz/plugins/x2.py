@@ -1,4 +1,4 @@
-from pyrogram import Client as app, filters,enums
+From pyrogram import Client as app, filters,enums
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import InlineKeyboardMarkup as mk, InlineKeyboardButton as btn
 from pyrogram.types import ChatPermissions
@@ -40,10 +40,10 @@ def transcribe_audio(audio_file_path):
 @app.on_message(filters.text & filters.group , group =72)
 def v(app,message):
     
-    if (message.text == "وش يقول؟" or message.text == "what?") and  message.reply_to_message.voice:
+    if (message.text == "شن يقول؟" or message.text == "شن يقول" or message.text == "what?") and message.reply_to_message and message.reply_to_message.voice:
         app.download_media(message.reply_to_message.voice.file_id,file_name="a.ogg")
         what = transcribe_audio("downloads/a.ogg")
         if what:
             message.reply(f"يقول: {what}")
         else:
-            message.reply("مافهمت وش يقول!!")
+            message.reply("ما فهمتش شن يقول!!")
