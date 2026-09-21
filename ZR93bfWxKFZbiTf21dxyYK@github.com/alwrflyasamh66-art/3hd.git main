@@ -32,12 +32,12 @@ def handle_messages(app, message):
         if owner(message.from_user.id,message.chat.id):
             ad = db.get(f"admins-{message.chat.id}")
             if len(ad) == 1:
-                return message.reply("⇜ مافيه ادمنية او رتب .")
+                return message.reply("⇜ مافيش ادمنية أو رتب .")
             for ix in ad:
                 db.unpush(f"admins-{message.chat.id}", ix)
             inf = f"""
-    ⇜ اهلين عيني مالك اساسي 
-    ⇜ نزلت ( {len(ad)} ) من الادمن .
+    ⇜ أهلاً بيك يا مالك يا أساسي 
+    ⇜ نزلت ( {len(ad)} ) من الادمنية .
     
     
     ༄
@@ -47,7 +47,7 @@ def handle_messages(app, message):
         admin_list = db.get(f"creators_{message.chat.id}")
         
         if len(admin_list) <=0:
-            return message.reply("⇜ مافيه مالكين .")
+            return message.reply("⇜ مافيش مالكين .")
         admin_string = "المالكين :\n"
         s = 0
         # Iterate over the list of administrator IDs
@@ -73,8 +73,8 @@ def handle_messages(app, message):
         print(db.get(f"admins-{message.chat.id}"))
         admin_list = db.get(f"admins-{message.chat.id}")
         if len(admin_list) <1:
-            return message.reply("⇜ مافية ادمن .")
-        admin_string = "الادمنيه :\n"
+            return message.reply("⇜ مافيش ادمن .")
+        admin_string = "الادمنية :\n"
         s = 0
         # Iterate over the list of administrator IDs
         for admin_id in (admin_list):
@@ -127,10 +127,10 @@ def handle_messages(app, message):
 
         return message.reply(
             output.replace("stickers", 'ملصقات').replace(
-                "text", 'الدردشه').replace('flood','تكرار').replace("gifs", 'المتحركات').replace(
+                "text", 'الدردشة').replace('flood','التكرار').replace("gifs", 'المتحركات').replace(
                     "documents",
-                    'الملفات').replace("forwards", 'التوجيهات').replace(
-                        "contact", 'الجهات').replace("photos", 'الصور').replace("badword",'السب').replace("id",'الايدي').replace("inline","الاشعارات").replace("edit","التعديل").replace('bigmsg','كلايش').replace('yt','اليوتيوب'))
+                    'الملفات').replace("forwards", 'التوجيه').replace(
+                        "contact", 'الجهات').replace("photos", 'الصور').replace("badword",'السب').replace("id",'الايدي').replace("inline","الاشعارات").replace("edit","التعديل").replace('bigmsg','الكلايش').replace('yt','اليوتيوب'))
 
 
     if text.startswith("فك تقييد"):
@@ -154,12 +154,12 @@ def handle_messages(app, message):
             if target:
                 app.restrict_chat_member(chat_id, target, ChatPermissions(can_send_messages=True, can_send_media_messages=True, can_send_other_messages=True))
                 return message.reply(f"""
-    ⇜ الوقح 「 {app.get_chat_member(chat_id,target).user.mention} 」 
-    ⇜ تم فك تقييده .
+    ⇜ العيل 「 {app.get_chat_member(chat_id,target).user.mention} 」 
+    ⇜ فكينا عليه التقييد .
     ༄
                 """)
         else:
-            return message.reply("⇜ الامر يخص ( الادمن وفوق وبس )")
+            return message.reply("⇜ الأمر يخص ( الادمنية وما فوق بس )")
     
     if text.startswith("تقييد"):
         import re
@@ -182,17 +182,17 @@ def handle_messages(app, message):
             if target:
                 app.restrict_chat_member(chat_id, target, ChatPermissions())
                 return message.reply(f"""
-    ⇜ الحمار 「 {app.get_chat_member(chat_id,target).user.mention} 」 
+    ⇜ الفرخ 「 {app.get_chat_member(chat_id,target).user.mention} 」 
     ⇜ تم تقييده .
     ༄
                 """)
         else:
-            return message.reply("⇜ الامر يخص ( الادمن وفوق وبس )")
+            return message.reply("⇜ الأمر يخص ( الادمنية وما فوق بس )")
     if text.startswith("تنظيف "):
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             count = int(text.split(" ")[1])
             if count > 400:
-                message.reply("⇜ لازم اقل من 400")
+                message.reply("⇜ لازم أقل من 400")
             else:
                 for msg in range(message.id, message.id - count, -1):
                     try:
@@ -205,7 +205,7 @@ def handle_messages(app, message):
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             my_dict = db.get(f"group_{chat_id}_mutelist")
             if len(my_dict['data']) <1:
-               return  message.reply("⇜ مافيه مكتومين .")
+               return  message.reply("⇜ مافيش مكتومين .")
             
             counter = 1
             mtot = "المكتومين :\n"
@@ -230,7 +230,7 @@ def handle_messages(app, message):
 
             for muted_user in muted_users:
                 if count > 100:
-                    response+="\n⇜ البوت يدير سكب للحسابات المحذوفة .\n࿓"
+                    response+="\n⇜ البوت دار تخطي للحسابات المحذوفة .\n࿓"
                     return message.reply(response, parse_mode=enums.ParseMode.HTML)
                     
                 if muted_user.user.is_deleted == True:
@@ -240,9 +240,9 @@ def handle_messages(app, message):
                     response += f"{count} ⇜ {username} ࿓ ( <code>{muted_user.user.id}</code> ) \n".replace("Deleted Account","0")
                     count += 1
             if count == 1:
-                return message.reply("⇜ مافية محظورين .")
+                return message.reply("⇜ مافيش محظورين .")
             else:
-                response+="\n⇜ البوت يدير سكب للحسابات المحذوفة .\n࿓"
+                response+="\n⇜ البوت دار تخطي للحسابات المحذوفة .\n࿓"
                 return message.reply(response, parse_mode=enums.ParseMode.HTML)
     if text == "مقيدين" or text == "المقيدين" or text == "المقيديين":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
@@ -253,7 +253,7 @@ def handle_messages(app, message):
 
             for muted_user in muted_users:
                 if count > 100:
-                    response+="\n⇜ البوت يدير سكب للحسابات المحذوفة.\n࿓"
+                    response+="\n⇜ البوت دار تخطي للحسابات المحذوفة.\n࿓"
                     return message.reply(response, parse_mode=enums.ParseMode.HTML)
                     break
                 if muted_user.user.is_deleted == True:
@@ -265,9 +265,9 @@ def handle_messages(app, message):
                     response += f"{count} ⇜ {username} ࿓ ( <code>{muted_user.user.id}</code> ) \n".replace("Deleted Account","0")
                     count += 1
             if count == 1:
-                return message.reply("⇜ مافية مقيدين .")
+                return message.reply("⇜ مافيش مقيدين .")
             else:
-                response+="\n⇜ البوت يدير سكب للحسابات المحذوفة .\n࿓"
+                response+="\n⇜ البوت دار تخطي للحسابات المحذوفة .\n࿓"
                 return message.reply(response, parse_mode=enums.ParseMode.HTML)
     if text == "مسح لمحظورين" or text == "مسح محظورين" or text == "مسح المحظورين":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
@@ -279,9 +279,9 @@ def handle_messages(app, message):
                 app.unban_chat_member(chat_id,muted_user.user.id)
                 count+=1
             if count == 1:
-                message.reply("↢ مافية محظورين .")
+                message.reply("↢ مافيش محظورين .")
             else:
-                message.reply(f"↢ اهلين عزيزي {rank_is(message.from_user.id,message.chat.id)} ، مسحت {count} محظور .")
+                message.reply(f"↢ أهلاً بيك يا {rank_is(message.from_user.id,message.chat.id)} ، مسحت {count} محظور .")
                 return
     if text == "مسح لمقيدين" or text == "مسح مقيدين" or text == "مسح المقيدين":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
@@ -297,9 +297,9 @@ def handle_messages(app, message):
         ChatPermissions(can_send_messages=True,can_send_media_messages=True))
                     count+=1
             if count == 1:
-                message.reply("↢ مافية مقيدين .")
+                message.reply("↢ مافيش مقيدين .")
             else:
-                message.reply(f"↢ اهلين عزيزي {rank_is(message.from_user.id,message.chat.id)} ، مسحت {count} مقيد .")
+                message.reply(f"↢ أهلاً بيك يا {rank_is(message.from_user.id,message.chat.id)} ، مسحت {count} مقيد .")
                 return
     if text == "رفع ادمن" and message.reply_to_message:
         usr_id = message.reply_to_message.from_user.id
@@ -308,19 +308,19 @@ def handle_messages(app, message):
         if owner(message.from_user.id,message.chat.id):
             if admin(usr_id,message.chat.id):
                 return message.reply(f"""
-⇜ الولد هذا 「 {message.reply_to_message.from_user.mention}
-⇜ اصلا ادمن.
+⇜ الطرف هذا 「 {message.reply_to_message.from_user.mention}
+⇜ راهو ادمن أصلاً.
 ༄
             """)
             else:
                 db.push(f"admins-{message.chat.id}",usr_id)
                 return message.reply(f"""
-⇜ الولد هذا 「 {message.reply_to_message.from_user.mention}
-⇜ صار توا ادمن !
+⇜ الطرف هذا 「 {message.reply_to_message.from_user.mention}
+⇜ ولى توا ادمن !
 ༄
             """)
         else:
-            return message.reply("الأمر يخص فقط ⇜ (المالكين) .")
+            return message.reply("الأمر يخص ⇜ (المالكين) بس .")
     if text == "تنزيل ادمن" and message.reply_to_message:
         usr_id = message.reply_to_message.from_user.id
         if usr_id == 5836188784:
@@ -328,19 +328,19 @@ def handle_messages(app, message):
         if owner(message.from_user.id,message.chat.id):
             if admin(usr_id,message.chat.id):
                 return message.reply(f"""
-⇜ الولد هذا 「 {message.reply_to_message.from_user.mention}
-⇜ اصلا مو ادمن.
+⇜ الطرف هذا 「 {message.reply_to_message.from_user.mention}
+⇜ مش ادمن أصلاً.
 ༄
             """)
             else:
                 db.unpush(f"admins-{message.chat.id}",usr_id)
                 return message.reply(f"""
-⇜ الولد هذا 「 {message.reply_to_message.from_user.mention}
-⇜ نزل هسة من الادمن !
+⇜ الطرف هذا 「 {message.reply_to_message.from_user.mention}
+⇜ نزلناه توة من الادمنية !
 ༄
             """)
         else:
-            return message.reply("الأمر يخص فقط ⇜ (المالكين) .")
+            return message.reply("الأمر يخص ⇜ (المالكين) بس .")
     if text.startswith("كتم"):
         import re
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
@@ -352,7 +352,7 @@ def handle_messages(app, message):
                 if target == 5836188784:
                     return message.reply("سلامات؟")
                 if (admin(target,message.chat.id) or owner(target,message.chat.id)):
-                    return message.reply("يغبي متقدر تكتم الادمنية او المالكين!؟")
+                    return message.reply("يا مهبولي ماتقدرش تكتم الادمنية والا المالكين!؟")
             else:
                 match = re.search(r"\d{9,}", text)
                 if match:
@@ -376,7 +376,7 @@ def handle_messages(app, message):
                         continue
                 if ff:
                     return message.reply(f"""
-⇜ الوقح 「 {name} 」 
+⇜ العيل 「 {name} 」 
 ⇜  مكتوم من قبل .
 ༄
             """)
@@ -384,7 +384,7 @@ def handle_messages(app, message):
                     try:
                         if str(target).isdigit():
                             if (admin(target,message.chat.id) or owner(target,message.chat.id)):
-                                return message.reply("يغبي متقدر تكتم الادمنية او المالكين!؟")
+                                return message.reply("يا مهبولي ماتقدرش تكتم الادمنية والا المالكين!؟")
                             else:
                                 name = app.get_chat_member(chat_id, target).user.first_name
                                 username = app.get_chat_member(chat_id, target).user.username
@@ -393,8 +393,8 @@ def handle_messages(app, message):
                                 print(users)
                                 db.set(f"group_{chat_id}_mutelist",users)
                                 return message.reply(f"""
-            ⇜ الوقح 「 {name} 」 
-            ⇜  كتمته .
+            ⇜ العيل 「 {name} 」 
+            ⇜  تم كتمه .
             ༄
                         """)
                         else:
@@ -407,8 +407,8 @@ def handle_messages(app, message):
                             print(users)
                             db.set(f"group_{chat_id}_mutelist",users)
                             return message.reply(f"""
-        ⇜ الوقح 「 {mn} 」 
-        ⇜  كتمته .
+        ⇜ العيل 「 {mn} 」 
+        ⇜  تم كتمه .
         ༄
                     """)
                     except:
@@ -417,12 +417,12 @@ def handle_messages(app, message):
                         print(users)
                         db.set(f"group_{chat_id}_mutelist",users)
                         return message.reply(f"""
-        ⇜ الوقح 「 {app.get_users(target).user.mention} 」 
-        ⇜  كتمته .
+        ⇜ العيل 「 {app.get_users(target).user.mention} 」 
+        ⇜  تم كتمه .
         ༄
                     """)
         else:
-            return message.reply("⇜ الامر يخص ( الادمن وفوق وبس )")
+            return message.reply("⇜ الأمر يخص ( الادمنية وما فوق بس )")
     if text.startswith("فك كتم"):
         import re
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
@@ -433,7 +433,7 @@ def handle_messages(app, message):
                 if target == 5836188784:
                     return message.reply("سلامات؟")
                 if (admin(target,message.chat.id) or owner(target,message.chat.id)):
-                    return message.reply("يورع متكدر تكتم الادمنية او المالكين!؟")
+                    return message.reply("يا عيل ماتقدرش تكتم الادمنية والا المالكين!؟")
             else:
                 match = re.search(r"\d{9,}", text)
                 if match:
@@ -459,18 +459,18 @@ def handle_messages(app, message):
                 if ff:
                     if str(target).isdigit():
                         if (admin(target,message.chat.id) or owner(target,message.chat.id)):
-                            return message.reply("يورع متكدر تكتم الادمنية او المالكين!؟")
+                            return message.reply("يا عيل ماتقدرش تكتم الادمنية والا المالكين!؟")
                         else:
                             return message.reply(f"""
-⇜ الوكح 「 {app.get_chat_member(message.chat.id,target).user.mention} 」 
-⇜  فكيت كتمة .
+⇜ العيل 「 {app.get_chat_member(message.chat.id,target).user.mention} 」 
+⇜  فكينا عليه الكتم .
 ༄
             """)
                     else:
                         
                         return message.reply(f"""
-⇜ الوكح 「 {app.get_users(target).user.first_name} 」 
-⇜  فكيت كتمة .
+⇜ العيل 「 {app.get_users(target).user.first_name} 」 
+⇜  فكينا عليه الكتم .
 ༄
             """)
                 else:
@@ -478,44 +478,44 @@ def handle_messages(app, message):
                         if str(target).isdigit():
                             
                             return message.reply(f"""
-    ⇜ الحلو 「 {app.get_chat_member(message.chat.id,target).user.mention} 」 
-    ⇜  مو مكتوم .
+    ⇜ السمحة 「 {app.get_chat_member(message.chat.id,target).user.mention} 」 
+    ⇜  مش مكتوم .
     ༄
                     """)
                         else:
                             return message.reply(f"""
-    ⇜ الحلو 「 {app.get_users(target).user.first_name} 」 
-    ⇜  مو مكتوم .
+    ⇜ السمحة 「 {app.get_users(target).user.first_name} 」 
+    ⇜  مش مكتوم .
     ༄
                     """)
                     except:
                         return message.reply(f"""
-    ⇜ الحلو 「 {target} 」 
-    ⇜  مو مكتوم .
+    ⇜ السمحة 「 {target} 」 
+    ⇜  مش مكتوم .
     ༄
                     """)
         else:
-            return message.reply("⇜ الامر يخص ( الادمن وفوق وبس )")
+            return message.reply("⇜ الأمر يخص ( الادمنية وما فوق بس )")
     if text == "مسح المكتومين":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             data = db.get(f"group_{chat_id}_mutelist")
             users = data['data']
             hm = len(users)
             if hm == 0: 
-                return message.reply("⇜ مافيه مكتومين تمسحهم .")
+                return message.reply("⇜ مافيش مكتومين باش نمسحوهم .")
             else:
                 l = []
                 
                 db.set(f"group_{chat_id}_mutelist",{"data":l})
-                return message.reply(f"⇜ ابشر ، حذفت {hm} شخص مكتوم .")
+                return message.reply(f"⇜ أبشر ، حذفت {hm} شخص مكتوم .")
         else:
-            return message.reply("⇜ الامر يخص ( الادمن وفوق وبس )")
+            return message.reply("⇜ الأمر يخص ( الادمنية وما فوق بس )")
     if text == "الردود":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             c = db.get(f"group_{chat_id}_replies")
             
             if len(c) == 1:
-                return message.reply("⇜ لا يوجد ردود.")
+                return message.reply("⇜ مافيش ردود.")
             else:
                 x = "⇜ الردود :\n"
                 count = 1
@@ -531,14 +531,14 @@ def handle_messages(app, message):
                             count+=1
                     except:
                         continue
-                return message.reply(x.replace("animation",'متحركة').replace("video",'فيديو').replace("text",'نص').replace("audio",'اغنية').replace("voice",'فويس').replace("photo",'صورة').replace("document",'ملف'))
+                return message.reply(x.replace("animation",'متحركة').replace("video",'فيديو').replace("text",'نص').replace("audio",'أغنية').replace("voice",'بصمة').replace("photo",'صورة').replace("document",'ملف'))
     if text == "مسح الردود":
         if owner(message.from_user.id,message.chat.id):
             v = len(db.get(f"group_{chat_id}_replies"))
             db.set(f"group_{chat_id}_replies",[{"rd":False}])
             return message.reply(f"⇜ مسحت {v} رد .")
         else:
-            return message.reply("⇜ الامر يخص ( المالك وفوق وبس )")
+            return message.reply("⇜ الأمر يخص ( المالك وما فوق بس )")
     
     if text.startswith("طرد"):
         import re
@@ -562,10 +562,9 @@ def handle_messages(app, message):
                 app.ban_chat_member(message.chat.id, target)
                 app.unban_chat_member(message.chat.id, target)
                 return message.reply(f"""
-    ⇜ الوكح 「 {app.get_chat_member(chat_id,target).user.mention} 」 
-    ⇜ تم طردته .
+    ⇜ العيل 「 {app.get_chat_member(chat_id,target).user.mention} 」 
+    ⇜ طردناه برا .
     ༄
                 """)
         else:
-            return message.reply("⇜ الامر يخص ( الادمن وفوق وبس )")
-    
+            return message.reply("⇜ الأمر يخص ( الادمنية وما فوق بس )")
