@@ -1,4 +1,4 @@
-from pyrogram import Client as app, filters,enums
+From pyrogram import Client as app, filters,enums
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import InlineKeyboardMarkup as mk, InlineKeyboardButton as btn
 from pyrogram.types import ChatPermissions
@@ -46,7 +46,7 @@ def get_creation_date(id: int) -> str:
         return get_date_as_string(id)[1]
 def rank_is(user_id,chat_id):
     if user_id in db.get(f"admins-{chat_id}"):
-        return "الادمن"
+        return "الأدمن"
     if user_id in db.get(f"creators_{chat_id}"):
         return "المالك"
     
@@ -71,7 +71,7 @@ def handle_messages(app, message):
         message.reply(f"رسائلك ⇜  {msgs_count}")
     if text == "ايدي":
         if db.get(f"lock_id_{chat_id}") == True:
-            message.reply("الايدي معطل من قبل الادمنية او المالكين .")
+            message.reply("الأيدي معطل من الأدمنية أو المالكين.")
         else:
             if message.reply_to_message:
                 chat_member = app.get_chat_member(message.chat.id,
@@ -82,16 +82,16 @@ def handle_messages(app, message):
                 infos = f"""
 ⇜ الاسم ↢ {message.reply_to_message.from_user.first_name} 
 ⇜ بالمنشن ↢ {message.reply_to_message.from_user.mention}
-⇜ الايدي ↢ {message.reply_to_message.from_user.id} 
+⇜ الأيدي ↢ {message.reply_to_message.from_user.id} 
 ⇜ اليوزر ↢ (  {message.reply_to_message.from_user.username} )
-⇜ الرتبه ↢  ( {rank_is(message.reply_to_message.from_user.id,message.chat.id)} )
+⇜ الرتبة ↢  ( {rank_is(message.reply_to_message.from_user.id,message.chat.id)} )
 ⇜ رتبتك بالمجموعة ↢  (  {rank} )
 ⇜  رسائلك ↢ {msgs_count} 
 ༄ 
         """.replace("ChatMemberStatus.MEMBER",
-                    'عضو').replace("ChatMemberStatus.ADMINISTRATOR", 'ادمن').replace(
+                    'عضو').replace("ChatMemberStatus.ADMINISTRATOR", 'أدمن').replace(
                         "ChatMemberStatus.OWNER",
-                        "المالك").replace("None", "مافية يوزر").replace("ChatMemberStatus.RESTRICTED",'عضو')
+                        "المالك").replace("None", "ما فيش يوزر").replace("ChatMemberStatus.RESTRICTED",'عضو')
                 message.reply(infos)
             else:
                 chat_member = app.get_chat_member(message.chat.id,
@@ -102,16 +102,16 @@ def handle_messages(app, message):
                 infos = f"""
 ⇜ الاسم ↢ {message.from_user.first_name} 
 ⇜ بالمنشن ↢ {message.from_user.mention}
-⇜ الايدي ↢ {message.from_user.id} 
+⇜ الأيدي ↢ {message.from_user.id} 
 ⇜ اليوزر ↢ (  {message.from_user.username} )
-⇜ الرتبه ↢  ( {rank_is(message.from_user.id,message.chat.id)} )
+⇜ الرتبة ↢  ( {rank_is(message.from_user.id,message.chat.id)} )
 ⇜ رتبتك بالمجموعة ↢  (  {rank} )
 ⇜  رسائلك ↢ {msgs_count} 
 ༄ 
         """.replace("ChatMemberStatus.MEMBER",
-                    'عضو').replace("ChatMemberStatus.ADMINISTRATOR", 'ادمن').replace(
+                    'عضو').replace("ChatMemberStatus.ADMINISTRATOR", 'أدمن').replace(
                         "ChatMemberStatus.OWNER",
-                        "المالك").replace("None", "مافية يوزر").replace("ChatMemberStatus.RESTRICTED",'عضو')
+                        "المالك").replace("None", "ما فيش يوزر").replace("ChatMemberStatus.RESTRICTED",'عضو')
                 message.reply(infos)
     if text == "الرابط":
         if db.key_exists(f"group_{message.chat.id}_link") == 0:
@@ -123,7 +123,7 @@ def handle_messages(app, message):
     if text == 'افتار' and message.reply_to_message and message.reply_to_message.from_user:
         m = message
         if not m.reply_to_message.from_user.photo:
-            return m.reply(f' مقدر اجيب افتاره يمكن حاظرني')
+            return m.reply(f'ما قدرتش نجيب أفتاره، كاين احتمال حاطني حظر')
         else:
             if m.reply_to_message.from_user.username:
                 photo = f'http://t.me/{m.reply_to_message.from_user.username}'
@@ -140,7 +140,7 @@ def handle_messages(app, message):
     if text == 'افتاري':
         m = message
         if not m.from_user.photo:
-            return m.reply(f' ماقدر اجيب افتارك ارسل نقطه خاص وارجع جرب')
+            return m.reply(f'ما قدرتش نجيب أفتارك، ابعت نقطة في الخاص وارجع جرب')
         else:
             if m.from_user.username:
                 photo = f'http://t.me/{m.from_user.username}'
@@ -156,7 +156,7 @@ def handle_messages(app, message):
     if text == "روليت":
         db.delete(f"running_rolet_{message.chat.id}")
         if db.get(f"running_rolet_{message.chat.id}"):
-                return message.reply("⇜ فيه روليت شغالة .")
+                return message.reply("⇜ كاين روليت شغالة توا.")
         else:
             db.set(f"running_rolet_players_{message.chat.id}", [])
             current_time = time.time()
@@ -164,48 +164,48 @@ def handle_messages(app, message):
             db.set(f"running_rolet_{message.chat.id}", True)
             db.set(f"running_rolet_admin_{chat_id}",message.from_user.id)
             
-            return message.reply(f"⇜ من {message.from_user.mention} بديت روليت جديد ..\n\n⇜ اذا تبي تفوت للعبة ارسل انا .\n\nعشان ننهي اللعبة ارسل تم (للي بدء اللعبة .)\n\n⇜ 5 دقايق وينمسح هذا الروليت ..")
-    if text == "انا":
+            return message.reply(f"⇜ من {message.from_user.mention} بدت روليت جديدة..\n\n⇜ كان تبي تخش للعبة ابعت أنا.\n\nباش ننهوا اللعبة ابعت تم (للشخص اللي بدأ اللعبة).\n\n⇜ 5 دقايق وتنمسح الروليت هادي..")
+    if text == "انا" or text == "أنا":
         if db.get(f"running_rolet_{message.chat.id}"):
             found = None
             players = db.get(f"running_rolet_players_{message.chat.id}")
             admin = db.get(f"running_rolet_admin_{message.chat.id}")
             if len(players) == 10:
-                return message.reply("الروليت قفلت فيها 10 !")
+                return message.reply("الروليت تسكرت، فيها 10 أعضاء!")
             if message.from_user.id == admin:
-                return message.reply("انت مشارك !")
+                return message.reply("أنت مشارك من الأول!")
             for p in players:
                 if p['id'] == message.from_user.id:
                     found = True
                 else:
                     continue
             if found:
-                return message.reply("انت مشارك !")
+                return message.reply("أنت مشارك من الأول!")
             else:
                 d = {"id": message.from_user.id, "name": message.from_user.mention}
                 db.push(f"running_rolet_players_{message.chat.id}", d)
-                return message.reply("ضفتك بلروليت")
+                return message.reply("ضفتك في الروليت")
         else:
-            return message.reply("مافيه روليت")
+            return message.reply("ما فيش روليت شغالة")
     if text == "تم":
         import random
         admin = db.get(f"running_rolet_admin_{message.chat.id}")
         if message.from_user.id == admin:
             if db.get(f"running_rolet_{message.chat.id}"):
                 players = db.get(f"running_rolet_players_{message.chat.id}")
-                if len(players) == 2 or len(players) >2:
+                if len(players) >= 2:
                     player = random.choice(players)
                     name = player['name']
                     db.delete(f"running_rolet_players_{message.chat.id}")
                     db.delete(f"running_rolet_{message.chat.id}")
                     db.delete(f"running_rolet_info_{message.chat.id}")
                     db.delete(f"running_rolet_admin_{message.chat.id}")
-                    return message.reply(f"اختاريت : {name}")
+                    return message.reply(f"اخترت: {name}")
                     
                 else:
-                    return message.reply("مافية ناس ..")
+                    return message.reply("ما فيش أعضاء يكفوا..")
             else:
-                return message.reply("مافيه روليت")
+                return message.reply("ما فيش روليت شغالة")
         return
     command = text
     if command.startswith("كشف"):
@@ -218,16 +218,16 @@ def handle_messages(app, message):
             rank = chat_member.status
             infos = f"""
 ⇜ الاسم ↢ {user.first_name} 
-⇜ الايدي ↢ {user.id} 
+⇜ الأيدي ↢ {user.id} 
 ⇜ اليوزر ↢ (  {user.username} )
-⇜ الرتبه ↢  ( {rank_is(user.id,message.chat.id)} )
+⇜ الرتبة ↢  ( {rank_is(user.id,message.chat.id)} )
 ⇜ بالمجموعة ↢  (  {rank} )
 ⇜ نوع الكشف ↢ {type_of_get_info} 
 ༄ 
 """.replace("ChatMemberStatus.MEMBER",
-            'عضو').replace("ChatMemberStatus.ADMINISTRATOR", 'ادمن').replace(
+            'عضو').replace("ChatMemberStatus.ADMINISTRATOR", 'أدمن').replace(
             "ChatMemberStatus.OWNER",
-            "المالك").replace("None", "مافية يوزر").replace("ChatMemeberStatus.RESTRICTED","عضو").replace(
+            "المالك").replace("None", "ما فيش يوزر").replace("ChatMemeberStatus.RESTRICTED","عضو").replace(
             "ChatMemberStatus.BANNED",'محظور')
             return message.reply(infos)
         if len(command) == 2:
@@ -240,25 +240,25 @@ def handle_messages(app, message):
                 else:
                     user = app.get_users(int(command[1]))
                     rank = None
-                    type_of_get_info = "بالايدي"
+                    type_of_get_info = "بالأيدي"
                 chat_member = app.get_chat_member(message.chat.id, user.id)
                 rank = chat_member.status
                 infos = f"""
 ⇜ الاسم ↢ {user.first_name} 
-⇜ الايدي ↢ {user.id} 
+⇜ الأيدي ↢ {user.id} 
 ⇜ اليوزر ↢ (  {user.username} )
-⇜ الرتبه ↢  ( {rank_is(user.id,message.chat.id)} )
+⇜ الرتبة ↢  ( {rank_is(user.id,message.chat.id)} )
 ⇜ بالمجموعة ↢  (  {rank} )
 ⇜ نوع الكشف ↢ {type_of_get_info} 
 ༄ 
 """.replace("ChatMemberStatus.MEMBER",
-                'عضو').replace("ChatMemberStatus.ADMINISTRATOR", 'ادمن').replace(
+                'عضو').replace("ChatMemberStatus.ADMINISTRATOR", 'أدمن').replace(
                 "ChatMemberStatus.OWNER",
-                "المالك").replace("None", "مافية يوزر")
+                "المالك").replace("None", "ما فيش يوزر")
                 message.reply(infos)
             except Exception as e:
                 #print(e)
-                message.reply("مالكيت احد")
+                message.reply("ملقيت حد")
     if text == "بايو":
         if message.reply_to_message:
             id = message.reply_to_message.from_user.id
@@ -266,7 +266,7 @@ def handle_messages(app, message):
             if get_bio:
                 return message.reply(f"``{get_bio}``",parse_mode=enums.ParseMode.MARKDOWN)
             else:
-                return message.reply("- معندة بايو .")
+                return message.reply("- ما عنداش بايو.")
         else:
             id = message.from_user.id
             get_bio = app.get_chat(id).bio
@@ -274,14 +274,13 @@ def handle_messages(app, message):
                 return message.reply(f"``{get_bio}``")
                 
             else:
-                return message.reply("- معندك بايو.")
-    if (text == "الانشاء" or text == "انشاء"):
+                return message.reply("- ما عندكش بايو.")
+    if (text == "الانشاء" or text == "انشاء" or text == "الإنشاء"):
         if message.reply_to_message:
             id = message.reply_to_message.from_user.id
             date = get_creation_date(id)
-            message.reply(f"الانشاء : {date}")
+            message.reply(f"تاريخ الإنشاء : {date}")
         else:
             id = message.from_user.id
             date = get_creation_date(id)
-            message.reply(f"الانشاء : {date}")
-    
+            message.reply(f"تاريخ الإنشاء : {date}")
