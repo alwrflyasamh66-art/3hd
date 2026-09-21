@@ -1,4 +1,4 @@
-from pyrogram import Client as app, filters,enums
+From pyrogram import Client as app, filters,enums
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import InlineKeyboardMarkup as mk, InlineKeyboardButton as btn
 from pyrogram.types import ChatPermissions
@@ -22,13 +22,13 @@ def handle_messages(app, message):
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
             else:
                 d = {f"{rd}":{"by":message.from_user.id,"date":f"{message.date}","file":message.video.file_id,"caption":caption,"type":"video"}}
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
         if message.photo:
             old = db.get(f"group_{message.chat.id}_replies")
             rd = db.get(f"new_reply_{message.chat.id}_{message.from_user.id}")
@@ -39,13 +39,13 @@ def handle_messages(app, message):
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
             else:
                 d = {f"{rd}":{"by":message.from_user.id,"date":f"{message.date}","file":message.photo.file_id,"caption":None,"type":"photo"}}
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
         if message.audio:
             old = db.get(f"group_{message.chat.id}_replies")
             rd = db.get(f"new_reply_{message.chat.id}_{message.from_user.id}")
@@ -57,13 +57,13 @@ def handle_messages(app, message):
                 db.set(f"group_{message.chat.id}_replies",old)
             
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
             else:
                 d = {f"{rd}":{"by":message.from_user.id,"date":f"{message.date}","file":message.audio.file_id,"caption":caption,"type":"audio"}}
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
         if message.document:
             old = db.get(f"group_{message.chat.id}_replies")
             rd = db.get(f"new_reply_{message.chat.id}_{message.from_user.id}")
@@ -74,13 +74,13 @@ def handle_messages(app, message):
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
             else:
                 d = {f"{rd}":{"by":message.from_user.id,"date":f"{message.date}","file":message.document.file_id,"caption":caption,"type":"document"}}
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
         
         
         if message.voice:
@@ -93,13 +93,13 @@ def handle_messages(app, message):
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
             else:
                 d = {f"{rd}":{"by":message.from_user.id,"date":f"{message.date}","file":message.voice.file_id,"caption":None,"type":"voice"}}
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
         if message.animation:
             old = db.get(f"group_{message.chat.id}_replies")
             rd = db.get(f"new_reply_{message.chat.id}_{message.from_user.id}")
@@ -110,10 +110,10 @@ def handle_messages(app, message):
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
             else:
                 d = {f"{rd}":{"by":message.from_user.id,"date":f"{message.date}","file":message.animation.file_id,"caption":None,"type":"animation"}}
                 old.append(d)
                 db.set(f"group_{message.chat.id}_replies",old)
                 db.delete(f"new_reply_{message.chat.id}_{message.from_user.id}")
-                return message.reply(f"الرد {rd} نضاف.")
+                return message.reply(f"الرد {rd} انضاف.")
