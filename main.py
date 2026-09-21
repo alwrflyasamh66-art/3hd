@@ -10,12 +10,12 @@ from asSQL import Client as cl
 data = cl("protect")
 db = data['data']
 db.create_table()
-db.set("botname",['عهد' , 'عهود' , 'بوت' ,'عاهد' , 'عهو'])
+db.set("botname",['ميرا' , 'ميرال' , 'بوت' ,'ميروو' , 'ميرا'])
 db.set("bad_words",['كس','عير','طيز','زب','كسمك','كسختك','طيزك','مص'])
 
 plugins = dict(root="plugins")
 
 Client("x",
-api_id=37339435,
-api_hash="c701d54aa378e57434d46d74f8b75f9c",
-bot_token="8566481559:AAHktUpD5KtzpgG_mMGBPQ3qCucImDeDm-I", plugins=plugins).run()
+api_id=39978956,
+api_hash="e7322ed176f1527600979186b4ea8da8",
+bot_token="8854898075:AAEySMV38C1Znqagp7VinKJiaNP3H_mp_NE", plugins=plugins).run()
