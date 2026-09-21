@@ -97,7 +97,7 @@ def handle_messages(app, message):
         # Send the message
         enums.ParseMode.DEFAULT
         return message.reply(admin_string)
-    if text == "معلومات الكروب" or text == "معلوماتنا" or text == "الاعدادات":
+    if text == "معلومات القروب" or text == "معلوماتنا" or text == "الاعدادات":
 
         lock_status = {
                 'stickers': None,
@@ -140,7 +140,7 @@ def handle_messages(app, message):
             reply_to_message = message.reply_to_message
             if reply_to_message:
                 target = reply_to_message.from_user.id
-                if target == 5836188784:
+                if target == 8854898075:
                     return message.reply("سلامات؟")
             else:
                 match = re.search(r"\d{9,}", text)
@@ -154,7 +154,7 @@ def handle_messages(app, message):
             if target:
                 app.restrict_chat_member(chat_id, target, ChatPermissions(can_send_messages=True, can_send_media_messages=True, can_send_other_messages=True))
                 return message.reply(f"""
-    ⇜ الوكح 「 {app.get_chat_member(chat_id,target).user.mention} 」 
+    ⇜ الوقح 「 {app.get_chat_member(chat_id,target).user.mention} 」 
     ⇜ تم فك تقييده .
     ༄
                 """)
@@ -168,7 +168,7 @@ def handle_messages(app, message):
             reply_to_message = message.reply_to_message
             if reply_to_message:
                 target = reply_to_message.from_user.id
-                if target == 5836188784:
+                if target == 8854898075:
                     return message.reply("سلامات؟")
             else:
                 match = re.search(r"\d{9,}", text)
@@ -182,7 +182,7 @@ def handle_messages(app, message):
             if target:
                 app.restrict_chat_member(chat_id, target, ChatPermissions())
                 return message.reply(f"""
-    ⇜ الوكح 「 {app.get_chat_member(chat_id,target).user.mention} 」 
+    ⇜ الحمار 「 {app.get_chat_member(chat_id,target).user.mention} 」 
     ⇜ تم تقييده .
     ༄
                 """)
@@ -230,7 +230,7 @@ def handle_messages(app, message):
 
             for muted_user in muted_users:
                 if count > 100:
-                    response+="\n⇜ البوت يسوي سكب للحسابات المحذوفة .\n࿓"
+                    response+="\n⇜ البوت يدير سكب للحسابات المحذوفة .\n࿓"
                     return message.reply(response, parse_mode=enums.ParseMode.HTML)
                     
                 if muted_user.user.is_deleted == True:
@@ -242,7 +242,7 @@ def handle_messages(app, message):
             if count == 1:
                 return message.reply("⇜ مافية محظورين .")
             else:
-                response+="\n⇜ البوت يسوي سكب للحسابات المحذوفة .\n࿓"
+                response+="\n⇜ البوت يدير سكب للحسابات المحذوفة .\n࿓"
                 return message.reply(response, parse_mode=enums.ParseMode.HTML)
     if text == "مقيدين" or text == "المقيدين" or text == "المقيديين":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
@@ -253,7 +253,7 @@ def handle_messages(app, message):
 
             for muted_user in muted_users:
                 if count > 100:
-                    response+="\n⇜ البوت يسوي سكب للحسابات المحذوفة.\n࿓"
+                    response+="\n⇜ البوت يدير سكب للحسابات المحذوفة.\n࿓"
                     return message.reply(response, parse_mode=enums.ParseMode.HTML)
                     break
                 if muted_user.user.is_deleted == True:
@@ -267,7 +267,7 @@ def handle_messages(app, message):
             if count == 1:
                 return message.reply("⇜ مافية مقيدين .")
             else:
-                response+="\n⇜ البوت يسوي سكب للحسابات المحذوفة .\n࿓"
+                response+="\n⇜ البوت يدير سكب للحسابات المحذوفة .\n࿓"
                 return message.reply(response, parse_mode=enums.ParseMode.HTML)
     if text == "مسح لمحظورين" or text == "مسح محظورين" or text == "مسح المحظورين":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
@@ -316,7 +316,7 @@ def handle_messages(app, message):
                 db.push(f"admins-{message.chat.id}",usr_id)
                 return message.reply(f"""
 ⇜ الولد هذا 「 {message.reply_to_message.from_user.mention}
-⇜ صار هسة ادمن !
+⇜ صار توا ادمن !
 ༄
             """)
         else:
@@ -352,7 +352,7 @@ def handle_messages(app, message):
                 if target == 5836188784:
                     return message.reply("سلامات؟")
                 if (admin(target,message.chat.id) or owner(target,message.chat.id)):
-                    return message.reply("يورع متكدر تكتم الادمنية او المالكين!؟")
+                    return message.reply("يغبي متقدر تكتم الادمنية او المالكين!؟")
             else:
                 match = re.search(r"\d{9,}", text)
                 if match:
@@ -376,7 +376,7 @@ def handle_messages(app, message):
                         continue
                 if ff:
                     return message.reply(f"""
-⇜ الوكح 「 {name} 」 
+⇜ الوقح 「 {name} 」 
 ⇜  مكتوم من قبل .
 ༄
             """)
@@ -384,7 +384,7 @@ def handle_messages(app, message):
                     try:
                         if str(target).isdigit():
                             if (admin(target,message.chat.id) or owner(target,message.chat.id)):
-                                return message.reply("يورع متكدر تكتم الادمنية او المالكين!؟")
+                                return message.reply("يغبي متقدر تكتم الادمنية او المالكين!؟")
                             else:
                                 name = app.get_chat_member(chat_id, target).user.first_name
                                 username = app.get_chat_member(chat_id, target).user.username
@@ -393,7 +393,7 @@ def handle_messages(app, message):
                                 print(users)
                                 db.set(f"group_{chat_id}_mutelist",users)
                                 return message.reply(f"""
-            ⇜ الوكح 「 {name} 」 
+            ⇜ الوقح 「 {name} 」 
             ⇜  كتمته .
             ༄
                         """)
@@ -407,7 +407,7 @@ def handle_messages(app, message):
                             print(users)
                             db.set(f"group_{chat_id}_mutelist",users)
                             return message.reply(f"""
-        ⇜ الوكح 「 {mn} 」 
+        ⇜ الوقح 「 {mn} 」 
         ⇜  كتمته .
         ༄
                     """)
@@ -417,7 +417,7 @@ def handle_messages(app, message):
                         print(users)
                         db.set(f"group_{chat_id}_mutelist",users)
                         return message.reply(f"""
-        ⇜ الوكح 「 {app.get_users(target).user.mention} 」 
+        ⇜ الوقح 「 {app.get_users(target).user.mention} 」 
         ⇜  كتمته .
         ༄
                     """)
