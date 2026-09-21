@@ -23,7 +23,7 @@ def yttt(app,message):
         else:
             return
     if db.get(f"lock_yt_{message.chat.id}"):
-        message.reply(f"⇜ عزيزي {message.from_user.mention} البحث مقفول او معطلة .")
+        message.reply(f"⇜ يا {message.from_user.mention} البحث معطل أو مقفل.")
     else:
         if len(message.text.split(None, 1)) < 2:
            return
@@ -33,25 +33,24 @@ def yttt(app,message):
         title = None
         channel = None
         try:
-            
-            
-            info =re[0]
+            info = re[0]
             vid = info['id']
             title = info['title']
             channel = info['channel']
         except Exception as e:
             print(e)
-            return message.reply("⇜ صار خطأ ")
+            return message.reply("⇜ صار خطأ أثناء البحث.")
         url = f'https://youtu.be/{vid}'
         ydl_ops = {"format": "bestaudio[ext=m4a]"}
         with yt_dlp.YoutubeDL(ydl_ops) as ydl:
             info_dict = ydl.extract_info(url, download=False)
             if int(info_dict['duration']) > 2605:
-              return message.reply("**⚠️ حد التحميل نص ساعه فقط**")
+              return message.reply("**⚠️ حد التحميل نص ساعة بس**")
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
         message.reply_audio(audio=audio_file,performer=channel,title=title,duration=info_dict['duration'],caption=f"@MainCutieBots ~ {stm(info_dict['duration'])}")
         os.remove(audio_file)
+
 @app.on_message(filters.command("بحث", ["&",""]),group = 20)
 def search(app, message):
     if message.text:
@@ -60,7 +59,7 @@ def search(app, message):
         else:
             return
     if db.get(f"lock_yt_{message.chat.id}"):
-        message.reply(f"⇜ عزيزي {message.from_user.mention} البحث مقفول او معطلة .")
+        message.reply(f"⇜ يا {message.from_user.mention} البحث معطل أو مقفل.")
     else:
          if len(message.text.split(None, 1)) < 2:
            return 
@@ -77,16 +76,15 @@ def search(app, message):
              )
            ])
          message.reply(
-            f"**⤶ هذي نتائج بحثك عن {query} :**",
+            f"**⤶ هذي نتائج بحثك على {query} :**",
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(buttons)
          )
-     
 
 @app.on_message(filters.regex("^تعطيل اليوتيوب$|^تعطيل التحميل$") & filters.group, group = 21)
 def dis_yt(app,message):
-    e = "**⇜ اليوتيوب معطل من قبل .**"
-    d = "**⇜ من 「 {} 」 \n⇜ ابشر قفلت اليوتيوب \n༄**"
+    e = "**⇜ اليوتيوب معطل من الأول.**"
+    d = "**⇜ تمام من 「 {} 」 \n⇜ سكرت اليوتيوب \n༄**"
     
     if message.text:
         if db.key_exists(f'group_{message.chat.id}') == 1:
@@ -99,10 +97,11 @@ def dis_yt(app,message):
         else:
             db.set(f'lock_yt_{message.chat.id}', True)
             message.reply(d.format(message.from_user.mention))
+
 @app.on_message(filters.regex("^تفعيل اليوتيوب$|^تفعيل التحميل$") & filters.group, group =22)
 def ena_yt(app,message):
-    e = "**⇜ اليوتيوب مفعل من قبل .**"
-    d = "**⇜ من 「 {} 」 \n⇜ ابشر فعلت اليوتيوب \n༄**"
+    e = "**⇜ اليوتيوب مفعل من الأول.**"
+    d = "**⇜ تمام من 「 {} 」 \n⇜ فعلت اليوتيوب \n༄**"
     
     if message.text:
         if db.key_exists(f'group_{message.chat.id}') == 1:
@@ -115,13 +114,13 @@ def ena_yt(app,message):
         else:
             db.set(f'lock_yt_{message.chat.id}', False)
             message.reply(d.format(message.from_user.mention))
+
 @app.on_callback_query(filters.regex("GET") , group = 23)
 def get_info(app, query: CallbackQuery):
-    
     user_id = query.data.split("GET")[0]
     vid_id = query.data.split("GET")[1]
     if not query.from_user.id == int(user_id):
-      return query.answer("⚠️ هذا الأمر لا يخصك ", show_alert=True)
+      return query.answer("⚠️ هدا الأمر مش ليك", show_alert=True)
     query.message.delete()
     yt = Y88F8(f'https://youtu.be/{vid_id}', max_results=1).to_dict()
     title = yt[0]['title']
@@ -161,21 +160,20 @@ error = InlineKeyboardMarkup (
 
 @app.on_callback_query(filters.regex("AUDIO") , group = 24)
 def get_audii(app, query: CallbackQuery):
-    
     user_id = query.data.split("AUDIO")[0]
     vid_id = query.data.split("AUDIO")[1]
     if not query.from_user.id == int(user_id):
-      return query.answer("⚠️ هذا الأمر لا يخصك ", show_alert=True)
+      return query.answer("⚠️ هدا الأمر مش ليك", show_alert=True)
     url = f'https://youtu.be/{vid_id}'
-    query.edit_message_text("**جاري التحميل ..**", reply_markup=download)
+    query.edit_message_text("**قاعد ينزل..**", reply_markup=download)
     ydl_ops = {"format": "bestaudio[ext=m4a]"}
     with yt_dlp.YoutubeDL(ydl_ops) as ydl:
         info_dict = ydl.extract_info(url, download=False)
         if int(info_dict['duration']) > 3605:
-          return query.edit_message_text("**⚠️ حد التحميل ساعة فقط**",reply_markup=error)
+          return query.edit_message_text("**⚠️ حد التحميل ساعة بس**",reply_markup=error)
         audio_file = ydl.prepare_filename(info_dict)
         ydl.process_info(info_dict)
-    query.edit_message_text("**جاري الإرسال ..**", reply_markup=upload)
+    query.edit_message_text("**قاعد يبعث..**", reply_markup=upload)
     response= requests.get(info_dict['thumbnail'])
     with open(f"{vid_id}.png", "wb") as file:
       file.write(response.content)
@@ -186,7 +184,7 @@ def get_audii(app, query: CallbackQuery):
       title=info_dict['title'],
       duration=int(info_dict['duration']),
       performer=info_dict['channel'],
-      caption=f'• البحث من -› {user.mention}',
+      caption=f'• البحث عن طريق -› {user.mention}',
       thumb=thumb
     )
     doneload = InlineKeyboardMarkup (
@@ -198,20 +196,18 @@ def get_audii(app, query: CallbackQuery):
     os.remove(thumb)
     os.remove(audio_file)
 
-
 @app.on_callback_query(filters.regex("VIDEO") , group = 26)
 def get_video(app, query: CallbackQuery):
-    
     user_id = query.data.split("VIDEO")[0]
     vid_id = query.data.split("VIDEO")[1]
     if not query.from_user.id == int(user_id):
-      return query.answer("⚠️ هذا الأمر لا يخصك ", show_alert=True)
+      return query.answer("⚠️ هدا الأمر مش ليك", show_alert=True)
     url = f'https://youtu.be/{vid_id}'
-    query.edit_message_text("**جاري التحميل ..**", reply_markup=download)
+    query.edit_message_text("**قاعد ينزل..**", reply_markup=download)
     with yt_dlp.YoutubeDL({}) as ydl:
         info_dict = ydl.extract_info(url, download=False)
         if int(info_dict['duration']) > 3605:
-          return query.edit_message_text("**⚠️ حد التحميل ساعة فقط**",reply_markup=error)
+          return query.edit_message_text("**⚠️ حد التحميل ساعة بس**",reply_markup=error)
     ydl_opts = {
         "format": "best",
         "keepvideo": True,
@@ -223,7 +219,7 @@ def get_video(app, query: CallbackQuery):
     with YoutubeDL(ydl_opts) as ytdl:
         ytdl_data = ytdl.extract_info(url, download=True)
         file_name = ytdl.prepare_filename(ytdl_data)
-    query.edit_message_text("**جاري الإرسال ..**", reply_markup=upload)
+    query.edit_message_text("**قاعد يبعث..**", reply_markup=upload)
     response= requests.get(info_dict['thumbnail'])
     with open(f"{vid_id}.png", "wb") as file:
       file.write(response.content)
@@ -232,7 +228,7 @@ def get_video(app, query: CallbackQuery):
     query.message.reply_video(
       file_name,
       duration=int(info_dict['duration']),
-      caption=f'• البحث من  -› {user.mention}',
+      caption=f'• البحث عن طريق -› {user.mention}',
       thumb=thumb
     )
     doneload = InlineKeyboardMarkup (
