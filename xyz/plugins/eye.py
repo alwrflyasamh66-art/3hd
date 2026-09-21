@@ -1,14 +1,16 @@
-from pyrogram import Client as app, filters,enums
+from pyrogram import Client as app, filters, enums
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import InlineKeyboardMarkup as mk, InlineKeyboardButton as btn
 from pyrogram.types import ChatPermissions
 
 from asSQL import Client as cl
-from .is_admin import owner,admin,add_msg
+from .is_admin import owner, admin, add_msg
+
 data = cl("protect")
 db = data['data']
+
 @app.on_message(filters.left_chat_member)
-def replx(app,message):
+def replx(app, message):
     chat_id = message.chat.id
     if int(message.left_chat_members[-1].id) == int(5836188784):
         db.delete(f"group_{message.chat.id}")
@@ -38,24 +40,22 @@ def replx(app,message):
         db.delete(f"group_{message.chat.id}_non")
 
 @app.on_message(filters.new_chat_members)
-def repl(app,message):
+def repl(app, message):
     chat_id = message.chat.id
     
     if int(message.new_chat_members[-1].id) == int(5836188784):
         try:
-            m = app.get_chat_member(chat_id=message.chat.id,user_id=5836188784)
+            m = app.get_chat_member(chat_id=message.chat.id, user_id=5836188784)
 
             if m.privileges:
                 q = m.privileges
             
-            
                 required_privileges = ['can_delete_messages', 'can_restrict_members', 'can_change_info', 'can_pin_messages']
                 
-                
                 if any(not q.__dict__.get(p, False) for p in required_privileges):
-                    false_privileges = [p.replace('can_pin_messages','تثبيت رسائل').replace('can_edit_messages','تعديل رسائل').replace('can_post_messages','ارسال رسائل').replace('can_change_info','تغيير معلومات المجموعة').replace('can_restrict_members','تقييد اعضاء').replace('can_delete_messages','حذف رسائل') for p in required_privileges if not q.__dict__.get(p, False)]
+                    false_privileges = [p.replace('can_pin_messages', 'تثبيت الرسائل').replace('can_edit_messages', 'تعديل الرسائل').replace('can_post_messages', 'إرسال الرسائل').replace('can_change_info', 'تغيير معلومات المجموعة').replace('can_restrict_members', 'تقييد الأعضاء').replace('can_delete_messages', 'حذف الرسائل') for p in required_privileges if not q.__dict__.get(p, False)]
                     privilege_names = "\n".join(f"* {p}" for p in false_privileges)
-                    messagee = f"عطيني هاي لصلاحيات :\n{privilege_names}"
+                    messagee = f"عطيني الصلاحيات هذي الأول يا غالي:\n{privilege_names}"
                     message.reply(messagee)
                     app.leave_chat(message.chat.id)
                 else:
@@ -64,7 +64,7 @@ def repl(app,message):
                 ids = 0
                 mn = None
                 ad = []
-                for userrs in app.get_chat_members(chat_id=message.chat.id,filter=enums.ChatMembersFilter.ADMINISTRATORS):
+                for userrs in app.get_chat_members(chat_id=message.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
                   x = userrs.status
                   if userrs.user.is_bot == True:
                       continue
@@ -72,16 +72,11 @@ def repl(app,message):
                     ad.append(userrs.user.id)
                   if x == enums.ChatMemberStatus.OWNER:
                       mn = userrs.user.mention
-                      db.push(f"creators_{message.chat.id}",userrs.user.id)
+                      db.push(f"creators_{message.chat.id}", userrs.user.id)
                       ids += userrs.user.id
-                '''
-                mn = userr.user.mention
-                ids = userr.user.id
-                '''
-                
+
                 if db.key_exists(f"group_{message.chat.id}") == 1:
-                    
-                    message.reply("⇜ الكروب مفعل من قبل  ..")
+                    message.reply("⇜ المجموعة هذه مفعلة من قبل يا طير..")
                     return
                 else:
                     ginfo = {
@@ -103,23 +98,23 @@ def repl(app,message):
                     db.set(f'lock_bigmessage_{chat_id}', False)
                     db.set(f'lock_documents_{chat_id}', False)
                     db.set(f'lock_photos_{chat_id}', False)
-                    db.set(f"lock_yt_{message.chat.id}",False)
-                    db.set(f"lock_edit_{chat_id}",False)
-                    db.set(f"lock_badword_{chat_id}",False)
-                    db.set(f"lock_text_{chat_id}",False)
-                    db.set(f"lock_id_{chat_id}",False)
-                    db.set(f"group_{message.chat.id}_mutelist",{"data":[]})
+                    db.set(f"lock_yt_{message.chat.id}", False)
+                    db.set(f"lock_edit_{chat_id}", False)
+                    db.set(f"lock_badword_{chat_id}", False)
+                    db.set(f"lock_text_{chat_id}", False)
+                    db.set(f"lock_id_{chat_id}", False)
+                    db.set(f"group_{message.chat.id}_mutelist", {"data": []})
                     db.set(f"group_{message.chat.id}_replies", [])
-                    db.set(f"group_{message.chat.id}_flood",5)
-                    db.set(f"lock_flood_{message.chat.id}",False)
+                    db.set(f"group_{message.chat.id}_flood", 5)
+                    db.set(f"lock_flood_{message.chat.id}", False)
                     db.set(f"group_{message.chat.id}_non", {"data": []})
                     
-                    app.send_message(message.chat.id,
-                f"بواسطة ⇜ {mn} .\n- مجموعة ⇜ {message.chat.title} ، تفعلت .")
-                    app.send_message(chat_id=int(1485149817),text=f"البوت تفعل بكروب جديد!\n- اسم لكروب : {message.chat.title} .\n- من قبل : {message.from_user.mention} .\n- الرابط : {app.export_chat_invite_link(chat_id)} .\n- الوقت : {message.date}")
+                    app.send_message(message.chat.id, f"بواسطة ⇜ {mn} .\n- مجموعة ⇜ {message.chat.title} ، تفعلت توا.")
+                    app.send_message(chat_id=int(1485149817), text=f"البوت تفعل في مجموعة جديدة!\n- اسم المجموعة : {message.chat.title} .\n- من قبل : {message.from_user.mention} .\n- الرابط : {app.export_chat_invite_link(chat_id)} .\n- الوقت : {message.date}")
             
         except Exception as e:
             print(e)
+
 @app.on_chat_member_updated()
 def handler(app, user):
     chat_id = user.chat.id
@@ -131,24 +126,24 @@ def handler(app, user):
         
         if p1.can_delete_messages != p2.can_delete_messages:
             if p1.can_delete_messages == False:
-                app.send_message(chat_id=chat_id,text="تم تعطيل المجموعة تلقائياً .")
+                app.send_message(chat_id=chat_id, text="تم تعطيل المجموعة تلقائياً.")
                 db.delete(f"group_{chat_id}")
             
         if p1.can_restrict_members != p2.can_restrict_members:
             if p1.can_restrict_members == False:
-                app.send_message(chat_id=chat_id,text="تم تعطيل المجموعة تلقائياً .")
+                app.send_message(chat_id=chat_id, text="تم تعطيل المجموعة تلقائياً.")
                 db.delete(f"group_{chat_id}")
         if p1.can_change_info != p2.can_change_info:
             if p1.can_change_info == False:
-                app.send_message(chat_id=chat_id,text="تم تعطيل المجموعة تلقائياً .")
+                app.send_message(chat_id=chat_id, text="تم تعطيل المجموعة تلقائياً.")
                 db.delete(f"group_{chat_id}")
         if p1.can_pin_messages != p2.can_pin_messages:
             if p1.can_pin_messages == False:
-                app.send_message(chat_id=chat_id,text="تم تعطيل المجموعة تلقائياً .")
+                app.send_message(chat_id=chat_id, text="تم تعطيل المجموعة تلقائياً.")
                 db.delete(f"group_{chat_id}")
         if p1.is_anonymous != p2.is_anonymous:
             if p1.is_anonymous == True:
-                app.send_message(chat_id=chat_id,text="تم تعطيل المجموعة تلقائياً .")
+                app.send_message(chat_id=chat_id, text="تم تعطيل المجموعة تلقائياً.")
                 db.delete(f"group_{chat_id}")
     else:
         return
