@@ -1,4 +1,4 @@
-from pyrogram import Client as app, filters,enums
+From pyrogram import Client as app, filters,enums
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import InlineKeyboardMarkup as mk, InlineKeyboardButton as btn
 from pyrogram.types import ChatPermissions
@@ -38,7 +38,7 @@ def handle_messages(app, message):
         
         if db.key_exists(f"group_{message.chat.id}") == 1:
            
-            message.reply("⇜ الكروب مفعل من قبل يالطيب ..")
+            message.reply("⇜ المجموعه هذه مفعلة من قبل يا طير ..")
             return
         else:
             ginfo = {
@@ -74,8 +74,8 @@ def handle_messages(app, message):
             db.set(f"group_{message.chat.id}_non", {"data": []})
             
             app.send_message(message.chat.id,
-                f"بواسطة ⇜ {mn} .\n- مجموعة ⇜ {message.chat.title} ، تفعلت .")
-            app.send_message(chat_id=int(1485149817),text=f"البوت تفعل بكروب جديد!\n- اسم لكروب : {message.chat.title} .\n- من قبل : {message.from_user.mention} .\n- الرابط : {app.export_chat_invite_link(chat_id)} .\n- الوقت : {message.date}")
+                f"بواسطة ⇜ {mn} .\n- مجموعة ⇜ {message.chat.title} ، تفعلت توا .")
+            app.send_message(chat_id=int(1485149817),text=f"البوت تفعل في مجموعة جديدة!\n- اسم المجموعة : {message.chat.title} .\n- من قبل : {message.from_user.mention} .\n- الرابط : {app.export_chat_invite_link(chat_id)} .\n- الوقت : {message.date}")
 @app.on_message(filters.text & filters.group , group =2)
 def locks(app,message):
     text = message.text
@@ -93,64 +93,64 @@ def locks(app,message):
     if text == "قفل الروابط" or text == "قفل روابط":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_urls_{chat_id}") == True:
-                message.reply("⇜ الروابط مقفول من قبل .")
+                message.reply("⇜ الروابط مقفولة من قبل .")
             else:
                 db.set(f"lock_urls_{chat_id}",True)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر قفلت الروابط
+    ⇜ تم، قفلت الروابط
     ༄
                 """)
         else:
-            message.reply("⇜ الامر يخص ( المالك ، الادمن )")
+            message.reply("⇜ الأمر هذا يخص ( المالك ، الأدمن )")
     if text == "فتح الروابط" or text == "فتح روابط":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_urls_{chat_id}") == False:
-                message.reply("⇜ الروابط مفتوح من قبل .")
+                message.reply("⇜ الروابط مفتوحة من قبل .")
             else:
                 db.set(f"lock_urls_{chat_id}",False)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر فتحت الروابط
+    ⇜ تم، فتحت الروابط
     ༄
                 """)
     if text == "قفل كلايش" or text == "قفل الكلايش":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_bigmsg_{chat_id}") == True:
-                message.reply("⇜ الكلايش مقفول من قبل .")
+                message.reply("⇜ الكلايش مقفولة من قبل .")
             else:
                 db.set(f"lock_bigmsg_{chat_id}",True)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر قفلت الكلايش
+    ⇜ تم، قفلت الكلايش
     ༄
                 """)
         else:
-            message.reply("⇜ الامر يخص ( المالك ، الادمن )")
+            message.reply("⇜ الأمر هذا يخص ( المالك ، الأدمن )")
     if text == "فتح كلايش" or text == "فتح الكلايش":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_bigmsg_{chat_id}") == False:
-                message.reply("⇜ الكلايش مفتوح من قبل .")
+                message.reply("⇜ الكلايش مفتوحة من قبل .")
             else:
                 db.set(f"lock_bigmsg_{chat_id}",False)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر فتحت الكلايش
+    ⇜ تم، فتحت الكلايش
     ༄
                 """)
     if text == 'فتح الصور' or text == "فتح لصور":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_photos_{chat_id}") == False:
-                message.reply("↢ لـ صور مفتوح من قبل .")
+                message.reply("↢ الصور مفتوحة من قبل .")
             else:
                 db.set(f'lock_photos_{chat_id}', False)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر فتحت الصور
+⇜ تم، فتحت الصور
 ༄
         """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == "قفل الكل":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             lock_status = {
@@ -174,7 +174,7 @@ def locks(app,message):
             for type, status in lock_status.items():
                 db.set(f'lock_{type}_{chat_id}', True)
             message.reply(
-                f"⇜ من 「 {message.from_user.mention} 」 \n⇜ ابشر قفلت كل شي .")
+                f"⇜ من 「 {message.from_user.mention} 」 \n⇜ تم، قفلت كل شيء .")
     if text == "فتح الكل":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             lock_status = {
@@ -198,79 +198,79 @@ def locks(app,message):
             for type, status in lock_status.items():
                 db.set(f'lock_{type}_{chat_id}', False)
             message.reply(
-                f"⇜ من 「 {message.from_user.mention} 」 \n⇜ ابشر فتحت كل شي .")
+                f"⇜ من 「 {message.from_user.mention} 」 \n⇜ تم، فتحت كل شيء .")
     if text == 'فتح لفيديوهات' or text == "فتح الفيديوهات":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_videos_{chat_id}") == False:
-                message.reply("↢ لـ فيديوهات مفتوح من قبل .")
+                message.reply("↢ الفيديوهات مفتوحة من قبل .")
             else:
                 db.set(f'lock_videos_{chat_id}', False)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر فتحت الفيديوهات
+⇜ تم، فتحت الفيديوهات
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'قفل الفيديوهات' or text == "قفل لفيديوهات":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_videos_{chat_id}") == True:
-                message.reply("↢ لـ فيديوهات مقفوله من قبل .")
+                message.reply("↢ الفيديوهات مقفولة من قبل .")
             else:
                 db.set(f'lock_videos_{chat_id}', True)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر قفلت الفيديوهات
+⇜ تم، قفلت الفيديوهات
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'قفل الملفات' or text == "قفل ملفات":
         if message.from_user.id in db.get(f"creators_{message.chat.id}"
                                           ) or message.from_user.id in db.get(
                                               f"admins-{message.chat.id}"):
             if db.get(f"lock_documents_{chat_id}") == True:
-                message.reply("↢ لـ ملفات مقفول من قبل .")
+                message.reply("↢ الملفات مقفولة من قبل .")
             else:
                 db.set(f'lock_documents_{chat_id}', True)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر قفلت لملفات
+⇜ تم، قفلت الملفات
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'فتح الملفات' or text == "فتح لملفات":
         if message.from_user.id in db.get(f"creators_{message.chat.id}"
                                           ) or message.from_user.id in db.get(
                                               f"admins-{message.chat.id}"):
             if db.get(f"lock_documents_{chat_id}") == False:
-                message.reply("↢ لـ ملفات مفتوح من قبل .")
+                message.reply("↢ الملفات مفتوحة من قبل .")
             else:
                 db.set(f'lock_documents_{chat_id}', False)
 
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر فتحت الملفات .
+⇜ تم، فتحت الملفات .
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'قفل لجهات' or text == "قفل الجهات":
         if message.from_user.id in db.get(f"creators_{message.chat.id}"
                                           ) or message.from_user.id in db.get(
                                               f"admins-{message.chat.id}"):
             if db.get(f"lock_contact_{chat_id}") == True:
-                message.reply("↢ لـ جهات مقفولة من قبل .")
+                message.reply("↢ الجهات مقفولة من قبل .")
             else:
                 db.set(f'lock_contact_{chat_id}', True)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر قفلت الجهات
+⇜ تم، قفلت الجهات
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'فتح الجهات' or text == "فتح لجهات":
         if message.from_user.id in db.get(f"creators_{message.chat.id}"
                                           ) or message.from_user.id in db.get(
@@ -278,48 +278,48 @@ def locks(app,message):
             db.set(f'lock_contact_{chat_id}', False)
             message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر فتحت الجهات
+⇜ تم، فتحت الجهات
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'قفل الصور' or text == "قفل لصور":
         if message.from_user.id in db.get(f"creators_{message.chat.id}"
                                           ) or message.from_user.id in db.get(
                                               f"admins-{message.chat.id}"):
             if db.get(f"lock_photos_{chat_id}") == True:
-                message.reply("↢ لـ صور مقفولة من قبل .")
+                message.reply("↢ الصور مقفولة من قبل .")
             else:
                 db.set(f'lock_photos_{chat_id}', True)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر قفلت الصور
+⇜ تم، قفلت الصور
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == "تعطيل الايدي" or text == "تعطيل ايدي":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_id_{chat_id}") == True:
-                message.reply("⇜ الايدي مقفول من قبل .")
+                message.reply("⇜ الآيدي مقفول من قبل .")
             else:
                 db.set(f"lock_id_{chat_id}",True)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر قفلت الايدي
+    ⇜ تم، قفلت الآيدي
     ༄
                 """)
         else:
-            message.reply("⇜ الامر يخص ( المالك ، الادمن )")
+            message.reply("⇜ الأمر هذا يخص ( المالك ، الأدمن )")
     if text == "تفعيل الايدي" or text == "تفعيل ايدي":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_id_{chat_id}") == False:
-                message.reply("⇜ الايدي مفتوح من قبل .")
+                message.reply("⇜ الآيدي مفتوح من قبل .")
             else:
                 db.set(f"lock_id_{chat_id}",False)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر فتحت الايدي
+    ⇜ تم، فتحت الآيدي
     ༄
                 """)
     
@@ -327,23 +327,23 @@ def locks(app,message):
     if text == "فتح الترحيب" or text == "فتح لترحيب":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_welcome_{message.chat.id}") == False:
-                message.reply("↢ لـ ترحيب مفتوح من قبل .")
+                message.reply("↢ الترحيب مفتوح من قبل .")
             else:
                 db.set(f"lock_welcome_{message.chat.id}",False)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر فتحت لترحيب
+    ⇜ تم، فتحت الترحيب
     ༄
                 """)
         if text == "تعطيل الترحيب" or text == "تعطيل لترحيب":
             if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
                 if db.get(f"lock_welcome_{message.chat.id}") == True:
-                    message.reply("↢ لـ ترحيب معطل من قبل .")
+                    message.reply("↢ الترحيب معطل من قبل .")
                 else:
                     db.set(f"lock_welcome_{message.chat.id}",True)
                     message.reply(f"""
         ⇜ من 「 {message.from_user.mention} 」 
-        ⇜ ابشر قفلت لترحيب
+        ⇜ تم، قفلت الترحيب
         ༄
                     """)
     if text == "قفل السب" or text == "قفل سب":
@@ -354,11 +354,11 @@ def locks(app,message):
                 db.set(f"lock_badword_{chat_id}",True)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر قفلت السب
+    ⇜ تم، قفلت السب
     ༄
                 """)
         else:
-            message.reply("⇜ الامر يخص ( المالك ، الادمن )")
+            message.reply("⇜ الأمر هذا يخص ( المالك ، الأدمن )")
     if text == "فتح السب" or text == "فتح سب":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_badword_{chat_id}") == False:
@@ -367,27 +367,27 @@ def locks(app,message):
                 db.set(f"lock_badword_{chat_id}",False)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر فتحت السب
+    ⇜ تم، فتحت السب
     ༄
                 """)
         else:
-            message.reply("⇜ الامر يخص ( المالك ، الادمن )")
+            message.reply("⇜ الأمر هذا يخص ( المالك ، الأدمن )")
     if text == "الترحيب" or text == "لترحيب" or text == "ترحيب":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             t = db.get(f"group_{message.chat.id}_welcome")
             if t == None:
-                message.reply("↢ مافيه ترحيب .")
+                message.reply("↢ ما فيش ترحيب .")
             else:
                 message.reply(t)
         else:
-            message.reply("↢ الامر يخص ( المالك ، الادمن )")
+            message.reply("↢ الأمر هذا يخص ( المالك ، الأدمن )")
     if text == "مسح لترحيب" or text == "مسح ترحيب":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             db.delete(f"group_{message.chat.id}_welcome")
             message.reply("↢ تم مسح الترحيب.")
             return
         else:
-           message.reply("↢ الامر يخص ( المالك ، الادمن )")
+           message.reply("↢ الأمر هذا يخص ( المالك ، الأدمن )")
 
 
     if text == "قفل الانلاين" or text == "قفل انلاين":
@@ -398,11 +398,11 @@ def locks(app,message):
                 db.set(f"lock_inline_{chat_id}",True)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر قفلت الانلاين
+    ⇜ تم، قفلت الانلاين
     ༄
                 """)
         else:
-            message.reply("⇜ الامر يخص ( المالك ، الادمن )")
+            message.reply("⇜ الأمر هذا يخص ( المالك ، الأدمن )")
     if text == "فتح انلاين" or text == "فتح الانلاين":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_inline_{chat_id}") == False:
@@ -411,17 +411,10 @@ def locks(app,message):
                 db.set(f"lock_inline_{chat_id}",False)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر فتحت الانلاين
+    ⇜ تم، فتحت الانلاين
     ༄
                 """)
 
-
-
-
-
-
-
-            
     if text == "قفل التعديل" or text == "قفل تعديل":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_edit_{chat_id}") == True:
@@ -430,11 +423,11 @@ def locks(app,message):
                 db.set(f"lock_edit_{chat_id}",True)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر قفلت التعديل
+    ⇜ تم، قفلت التعديل
     ༄
                 """)
         else:
-            message.reply("⇜ الامر يخص ( المالك ، الادمن )")
+            message.reply("⇜ الأمر هذا يخص ( المالك ، الأدمن )")
     if text == "فتح التعديل" or text == "فتح تعديل":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_edit_{chat_id}") == False:
@@ -443,135 +436,135 @@ def locks(app,message):
                 db.set(f"lock_edit_{chat_id}",False)
                 message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر فتحت التعديل
+    ⇜ تم، فتحت التعديل
     ༄
                 """)
     if text == 'قفل الملصقات' or text == "قفل ملصقات":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get("lock_stickers_{chat_id}") == True:
-                message.reply("↢ لـ ملصقات مقفول من قبل .")
+                message.reply("↢ الملصقات مقفولة من قبل .")
             else:
                 db.set(f'lock_stickers_{chat_id}', True)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر قفلت لستيكر
+⇜ تم، قفلت الملصقات
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'فتح لملصقات' or text == "فتح الملصقات":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_stickers_{chat_id}") == False:
-                message.reply("↢ لـ ملصقات مفتوح من قبل .")
+                message.reply("↢ الملصقات مفتوحة من قبل .")
             else:
                 db.set(f'lock_stickers_{chat_id}', False)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر فتحت لملصقات
+⇜ تم، فتحت الملصقات
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'قفل التوجيه' or text == "قفل لتوجيه":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_forwards_{chat_id}") == True:
-                message.reply("↢ لـ توجيه مقفول من قبل .")
+                message.reply("↢ التوجيه مقفول من قبل .")
 
             db.set(f'lock_forwards_{chat_id}', True)
             message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر قفلت لتوجيه
+⇜ تم، قفلت التوجيه
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'فتح لتوجيه' or text == "فتح التوجيه":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
 
             db.set(f'lock_forwards_{chat_id}', False)
             message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر فتحت التوجيه 
+⇜ تم، فتحت التوجيه 
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'قفل الدردشه' or text == "قفل الدردشة":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_text_{chat_id}") == True:
-                message.reply("↢ لـ دردشة مقفول من قبل .")
+                message.reply("↢ الدردشة مقفولة من قبل .")
             else:
                 db.set(f'lock_text_{chat_id}', True)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر قفلت الدردشة
+⇜ تم، قفلت الدردشة
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'فتح الدردشه' or text == "فتح الدردشة":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_text_{chat_id}") == False:
-                message.reply("↢ لـ دردشة مفتوح من قبل .")
+                message.reply("↢ الدردشة مفتوحة من قبل .")
             else:
                 db.set(f'lock_text_{chat_id}', False)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر فتحت الدردشه
+⇜ تم، فتحت الدردشة
 ༄
             """)
     if text == 'قفل المتحركات' or text == "قفل لمتحركات":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_gifs_{chat_id}") == True:
-                message.reply("↢ لـ متحركات مقفول من قبل .")
+                message.reply("↢ المتحركات مقفولة من قبل .")
             else:
                 db.set(f'lock_gifs_{chat_id}', True)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر قفلت المتحركة
+⇜ تم، قفلت المتحركات
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'فتح المتحركه' or text == "فتح لمتحركه":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_gifs_{chat_id}") == False:
-                message.reply("↢ لـ متحركات مفتوح من قبل .")
+                message.reply("↢ المتحركات مفتوحة من قبل .")
             else:
                 db.set(f'lock_gifs_{chat_id}', False)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر فتحت لمتحركات
+⇜ تم، فتحت المتحركات
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == "القوانين" or text == "قوانين":
         message.reply(f"{db.get(f'group_{chat_id}_rules')}")
 
     if text == 'قفل التكرار' or text == "قفل تكرار":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_flood_{chat_id}") == True:
-                message.reply("↢ لـ تكرار مقفول من قبل .")
+                message.reply("↢ التكرار مقفول من قبل .")
             else:
                 db.set(f'lock_flood_{chat_id}', True)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر قفلت لتكرار
+⇜ تم، قفلت التكرار
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
     if text == 'فتح التكرار' or text == "فتح تكرار":
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             if db.get(f"lock_flood_{chat_id}") == False:
-                message.reply("↢ لـ تكرار مفتوح من قبل .")
+                message.reply("↢ التكرار مفتوح من قبل .")
             else:
                 db.set(f'lock_flood_{chat_id}', False)
                 message.reply(f"""
 ⇜ من 「 {message.from_user.mention} 」 
-⇜ ابشر فتحت لتكرار
+⇜ تم، فتحت التكرار
 ༄
             """)
         else:
-            message.reply("⇜ هذا الامر يخص ( الادمن وفوق ) بس")
+            message.reply("⇜ الأمر هذا يخص ( الأدمن وفوق ) بس")
