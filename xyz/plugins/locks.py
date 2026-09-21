@@ -1,4 +1,4 @@
-from pyrogram import Client as app, filters,enums
+From pyrogram import Client as app, filters,enums
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import InlineKeyboardMarkup as mk, InlineKeyboardButton as btn
 from pyrogram.types import ChatPermissions
@@ -68,21 +68,21 @@ def texts_filter(_,message):
         else:
             message.delete()
             message.reply(
-                f"⇜ عزيزي 「 {message.from_user.mention} 」 \n⇜ الانلاين مقفول.")
+                f"⇜ يا غالي 「 {message.from_user.mention} 」 \n⇜ الانلاين مقفول.")
     if lock_big and len(message.text) >400:
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             return
         else:
             message.delete()
             message.reply(
-                f"⇜ عزيزي 「 {message.from_user.mention} 」 \n⇜ ممنوع الكلام لكبير.")
+                f"⇜ يا غالي 「 {message.from_user.mention} 」 \n⇜ ممنوع الكلام الطويل والتجريد.")
     if lock_bads and message.text:
         if owner(message.from_user.id,message.chat.id) or admin(message.from_user.id,message.chat.id):
             return
         else:
             if any(word in bads for word in message.text.split()):
                 message.delete()
-                message.reply(f"⇜ عزيزي [ {message.from_user.mention} ] ، ممنوع السب .")
+                message.reply(f"⇜ يا غالي [ {message.from_user.mention} ] ، ممنوع السب والتصقيع .")
                     
 
     if lock_text and message.text:
@@ -96,7 +96,7 @@ def texts_filter(_,message):
         else:
             if "MessageEntityType.URL" in str(message):
                 message.delete()
-                message.reply(f"⇜ عزيزي [ {message.from_user.mention} ] ، ممنوع الروابط .")
+                message.reply(f"⇜ يا غالي [ {message.from_user.mention} ] ، ممنوع الروابط .")
 @app.on_message(filters.media & filters.group, group =3)
 def media_filter(_,message):
     chat_id = message.chat.id
