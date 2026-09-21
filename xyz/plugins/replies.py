@@ -1,4 +1,4 @@
-from pyrogram import Client as app, filters,enums
+From pyrogram import Client as app, filters,enums
 from pyrogram.enums import ChatMemberStatus
 from pyrogram.types import InlineKeyboardMarkup as mk, InlineKeyboardButton as btn
 from pyrogram.types import ChatPermissions
@@ -25,7 +25,7 @@ def handle_messages(app, message):
             db.delete(f'group_{message.chat.id}')
             message.reply(f"""
     ⇜ من 「 {message.from_user.mention} 」 
-    ⇜ ابشر عطلت لكروب
+    ⇜ تم، عطلت المجموعة
     ༄
                 """)
 @app.on_message(filters.text & filters.group , group = 9)
@@ -43,4 +43,3 @@ def r(app,message):
     
     if db.get(f"group_{message.chat.id}_custom_{text}"):
         text = db.get(f"group_{message.chat.id}_custom_{text}")
-    
